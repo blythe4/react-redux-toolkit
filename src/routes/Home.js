@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { connect, useSelector } from "react-redux";
 
-const Home = () => {
+const Home = ({ toDos }) => {
     const [text, setText] = useState("");
+    const todos = useSelector((state) => state);
     const onChange = (e) => {
         setText(e.target.value);
     };
@@ -16,8 +18,14 @@ const Home = () => {
             <form onSubmit={onSubmit}>
                 <input onChange={onChange} type="text" value={text} placeholder="edit todo" />
             </form>
-            <ul></ul>
+            <ul>{JSON.stringify(todos)}</ul>
         </>
     );
 };
-export default Home;
+
+const mapStateToProps = (state) => {
+    return {
+        toDos: state,
+    };
+};
+export default connect(mapStateToProps)(Home);
