@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import Todo from "../components/ToDo";
 import { addToDo } from "../store";
 
 const Home = ({ toDos, addToDo }) => {
     const [text, setText] = useState("");
-    // const todos = useSelector((state) => state);
-    // const dispatch = useDispatch();
     const onChange = (e) => {
         setText(e.target.value);
     };
@@ -14,7 +13,6 @@ const Home = ({ toDos, addToDo }) => {
         e.preventDefault();
         setText("");
         addToDo(text);
-        // dispatch(addToDo(text));
     };
     return (
         <>
@@ -23,7 +21,11 @@ const Home = ({ toDos, addToDo }) => {
                 <input onChange={onChange} type="text" value={text} placeholder="edit todo" />
                 <button>Add</button>
             </form>
-            <ul>{JSON.stringify(toDos)}</ul>
+            <ul>
+                {toDos.map((toDo) => (
+                    <Todo {...toDo} key={toDo.id} />
+                ))}
+            </ul>
         </>
     );
 };
