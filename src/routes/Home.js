@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todo from "../components/ToDo";
-import { addToDo } from "../store";
+import { add } from "../store";
 
 const Home = () => {
     const [text, setText] = useState("");
@@ -14,7 +14,7 @@ const Home = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         setText("");
-        dispatch(addToDo(text));
+        dispatch(add(text));
     };
     return (
         <>
